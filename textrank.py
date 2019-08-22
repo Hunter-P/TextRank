@@ -1,5 +1,5 @@
 # -*- encoding=utf-8 -*-
-# author: Peng Jiaixn
+# author: hunter
 
 import numpy as np
 from collections import defaultdict
