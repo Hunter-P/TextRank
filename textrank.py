@@ -60,7 +60,7 @@ class TextRank:
         """
         self.data = data  # 字符串格式
 
-    def extract_key_words(self, topK=20, window=5, iteration=200, allowPOS=('ns', 'n'), stopwords=True):
+    def extract_key_words(self, topK=20, window=4, iteration=200, allowPOS=('ns', 'n'), stopwords=True):
         """
         抽取关键词
         :param allowpos: 词性
@@ -116,7 +116,7 @@ class TextRank:
                 word_list.append(t[0])
         return word_list
 
-    def extract_key_sentences(self, topK=3, window=3, ndim=20, allowPOS=('ns', 'ni', 'nl', 'nz', 'n', 'v', 'nh'), stopwords=True, iteration=300):
+    def extract_key_sentences(self, topK=3, window=3, ndim=20, allowPOS=('ns', 'ni', 'nl'), stopwords=True, iteration=300):
         """
         抽取关键句子
         :param topK: 前K句话
@@ -201,8 +201,11 @@ class TextRank:
         new_sentence_list = []
         if stopwords:
             stop_words = [line.strip() for line in open('stopwords.txt', encoding='UTF-8').readlines()]
-            stopwords_news = [line.strip() for line in open('stopwords_news.txt', encoding='UTF-8').readlines()]
-            all_stopwords = stop_words + stopwords_news
+            try:
+                stopwords_news = [line.strip() for line in open('stopwords_news.txt', encoding='UTF-8').readlines()]
+                all_stopwords = stop_words + stopwords_news
+            except:
+                all_stopwords = stop_words
         else:
             all_stopwords = ''
         for s in sentence_list:
